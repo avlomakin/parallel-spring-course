@@ -14,7 +14,7 @@ abstract class MyQueueWorker<T>(
     private var workingThread: Thread? = null
 
     /**
-     * It's illegal to call this method from multiple threads
+     * This method is NOT thread-safe
      */
     fun start() {
         if(workingThread != null){
@@ -42,7 +42,7 @@ abstract class MyQueueWorker<T>(
     protected abstract fun action()
 
     /**
-     * It's illegal to call this method from multiple threads
+     * This method is NOT thread-safe
      */
     fun stop() {
         val workingThread = this.workingThread ?: throw IllegalStateException("nothing to stop")
